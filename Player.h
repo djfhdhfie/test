@@ -1,25 +1,14 @@
 #pragma once
+
+#include <memory>
+#include "NPC.h"
+
 class Player
 {
 private:
-	unique_ptr<NPC> currentCharacter{ nullptr }; // сам будет очищаться, если не будем пользоваться
+    std::unique_ptr<NPC> currentCharacter{ nullptr }; // сам будет очищаться
+
 public:
-	void Create(unique_ptr<NPC> character)
-	{
-		currentCharacter = move(character);
-		currentCharacter->Create();
-	}
-	NPC* GetCharacter()
-	{
-		return currentCharacter.get();
-	}
-	/*
-	void GetInfo(unique_ptr<NPC> character) // ДЗ: СДЕЛАТЬ ДРУЖ.МЕТОД
-	{
-		currentCharacter.swap(, Wizard);
-
-
-
-	};
-	*/
+    void Create(std::unique_ptr<NPC> character);
+    NPC* GetCharacter();
 };

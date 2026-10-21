@@ -1,19 +1,32 @@
-#include <iostream> 
-#include<vector>
+#pragma once
+
+#include <string>
+#include <vector>
+
 #include "NPC.h"
-#include "Spell.h"
+
+struct Spell
+{
+    std::string name{ "spell" };
+    unsigned int damage{ 1 };
+};
 
 class Wizard : virtual public NPC
 {
 protected:
-	short intellect{ 29 };
-	vector<Spell> spells;
-public:
-	Wizard(){};
-	void Create() override{};
-	void GetInfo(){};
-	void LearnSpell(){};
+    short intellect{ 29 };
+    std::vector<Spell> spells;
 
-	void Relaculate() {};
-	~Wizard() {};
+public:
+    Wizard(); // конструктор вызывается в момент создания экземпляра
+
+    void Create() override;
+
+    void GetInfo();
+
+    void LearnSpell();
+
+    void Relaculate();
+
+    ~Wizard();
 };

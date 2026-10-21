@@ -13,45 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\classes">
+      <UniqueIdentifier>{c9fb8bf0-6e0e-4814-a155-b85c36036a18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Wizard.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.cpp">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="NPC.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Warrior.cpp">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Warrior.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Wizard.cpp">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
     <ClCompile Include="07.10.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="NPC.h">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Исходные файлы\classes</Filter>
     </ClCompile>
-    <ClCompile Include="Warrior.h">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Wizard.h">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="NPC.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Warrior.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Wizard.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="Paladin.cpp">
+      <Filter>Исходные файлы\classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Evil.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
     <ClInclude Include="Paladin.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
     <ClInclude Include="Spell.h">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

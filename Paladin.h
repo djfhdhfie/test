@@ -1,32 +1,17 @@
 #pragma once
-class Paladin : public Warrior, public Wizard {
+
+#include "Warrior.h"
+#include "Wizard.h"
+
+// множественное наследование
+class Paladin : public Warrior, public Wizard
+{
 public:
-	Paladin()
-	{
-		intellect = 25;
-		strength = 19;
-		health = 25;
-		damage = 25;
+    Paladin();
 
-		Create(); // теперь вызывается сам Паладин
+    void Create() override;
 
-	}
-	void Create() override
-	{
-		// realizyite v Npc 
-		cout << "Вы создали паладина \nЗадайте имя игрока\n" << endl;
-		cin >> name;
+    void GetInfo();
 
-		GetInfo();
-		GetWeapon();
-		LearnSpell();
-	};
-	void GetInfo()
-	{
-		Warrior::GetInfo();
-		cout << "интеллект: " << intellect << endl;
-	};
-	~Paladin() {
-		cout << "отошел в мир иной..." << endl;
-	}
+    ~Paladin();
 };
