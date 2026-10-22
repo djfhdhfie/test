@@ -26,7 +26,7 @@ public:
 	unsigned int GetHealth() { return health; }; // геттер
 	void SetHealth(unsigned int health) { this->health = health; }; // сеттер
 
-	void GetInfo()
+	virtual void GetInfo()
 	{
 		cout << "имя: " << name << endl;
 		cout << "здоровье: " << health << endl;
@@ -58,6 +58,7 @@ struct Weapon
 {
 	string name{ "weapon" };
 	unsigned int damage{ 1 };
+	WeaponQuality quality{ WeaponQuality::Common }; //поле качества
 };
 
 class Warrior : virtual public NPC
@@ -92,11 +93,10 @@ public:
 	{
 		cout << "Вы создали война\nЗадайте имя игрока\n" << endl;
 		cin >> name;
-
 		GetInfo();
 		GetWeapon();
-	};
-	void GetInfo()
+	}
+	virtual void GetInfo()
 	{
 		NPC::GetInfo();
 		cout << "сила: " << strength << endl;
@@ -104,13 +104,14 @@ public:
 	void GetWeapon()
 	{
 		Weapon weapon;
-		weapon.damage = 1;
-		weapon.name = "кулаки";
+		weapon.damage = 5;
+		weapon.name = "Стальной меч";
+		weapon.quality = WeaponQuality::Rare;
 		weapons.push_back(weapon);
 
 		cout << name << " взял в руки оружие " << weapons[0].name << endl;
-		cout << " добавка к урону = " << weapons[0].damage << endl;
-	};
+		cout << "Качество оружия: " << GetQualityName(weapons[0].quality) << endl;
+	}
 
 	void Relaculate() {
 		NPC::Relaculate();
@@ -156,7 +157,7 @@ public:
 		GetInfo();
 		LearnSpell();
 	};
-	void GetInfo()
+	virtual void GetInfo()
 	{
 		NPC::GetInfo();
 		cout << "интеллект: " << intellect << endl;
@@ -228,7 +229,7 @@ public:
 		health = 25;
 		damage = 25;
 
-		Create(); // теперь вызывается сам Паладин
+		//Create(); // теперь вызывается сам Паладин
 
 	}
 	void Create() override
@@ -246,6 +247,10 @@ public:
 		Warrior::GetInfo();
 		cout << "интеллект: " << intellect << endl;
 	};
+	void Relaculate() {
+		Warrior::Relaculate();
+		Wizard::Relaculate();
+	}
 	~Paladin() {
 		cout << "отошел в мир иной..." << endl;
 	}
@@ -282,6 +287,120 @@ void TakeDamage(NPC* npc, unsigned int damage)
 	npc->SetHealth(npc->GetHealth() - damage); //npc.health - можно благодаря тому, что дружественный класс (напрямую)
 	cout << "Вам нанесли урон: " << endl;
 	cout << "Оставшееся здоровье = " <<npc->health << endl;
+}
+
+
+class Archer : virtual public NPC
+{
+protected:
+	short agility{ 25 };
+	vector<Weapon> weapons;
+public:
+	Archer()
+	{
+		name = "Лучник";
+		damage = 15;
+		health = 25;
+		armor = 10;
+	}
+	void Create() override
+	{
+		cout << "Вы создали лучника\nЗадайте имя игрока\n" << endl;
+		cin >> name;
+		GetInfo();
+		GetWeapon();
+	};
+	void GetInfo() override
+	{
+		NPC::GetInfo();
+		cout << "ловкость: " << agility << endl;
+	};
+	void GetWeapon()
+	{
+		Weapon bow;
+		bow.damage = 8;
+		bow.name = "Длинный лук";
+		bow.quality = WeaponQuality::Common;
+		weapons.push_back(bow);
+
+		cout << name << " взял в руки оружие " << weapons[0].name << endl;
+		cout << "Качество оружия: " << GetQualityName(weapons[0].quality) << endl;
+	};
+	void Relaculate() {
+		NPC::Relaculate();
+		damage += agility / 10;
+	}
+	~Archer() { cout << name << " сдался без боя" << endl; }
+};
+
+class Rogue : virtual public NPC
+{
+protected:
+	short stealth{ 30 };
+	vector<Weapon> weapons;
+public:
+	Rogue()
+	{
+		name = "Разбойник";
+		damage = 25;
+		health = 18;
+		armor = 5;
+	}
+	void Create() override
+	{
+		cout << "Вы создали разбойника\nЗадайте имя игрока\n" << endl;
+		cin >> name;
+		GetInfo();
+		GetWeapon();
+	};
+	void GetInfo() override
+	{
+		NPC::GetInfo();
+		cout << "скрытность: " << stealth << endl;
+	};
+	void GetWeapon()
+	{
+		Weapon dagger;
+		dagger.damage = 12;
+		dagger.name = "Отравленный кинжал";
+		dagger.quality = WeaponQuality::Legendary;
+		weapons.push_back(dagger);
+
+		cout << name << " взял в руки оружие " << weapons[0].name << endl;
+		cout << "Качество оружия: " << GetQualityName(weapons[0].quality) << endl;
+	};
+	void Relaculate() {
+		NPC::Relaculate();
+		damage += stealth / 10;
+	}
+	~Rogue() { cout << name << " скрылся в тенях" << endl; }
+};
+
+
+enum class CharacterType {
+	Warrior = 1, // Воин
+	Wizard = 2,    // Маг
+	Paladin = 3,  // Паладин
+	Archer = 4,   //Лучник
+	Rogue = 5    // Разбойник
+};
+
+enum class WeaponQuality {
+	Common,    // Обычное
+	Rare,      // Редкое
+	Epic,      // Эпическое
+	Legendary  // Легендарное
+};
+
+// Вспомогательная функция для вывода качества оружия в консоль
+string GetQualityName(WeaponQuality quality) {
+	switch (quality) {
+	case WeaponQuality::Common: return "Обычное";
+	case WeaponQuality::Rare: return "Редкое";
+	case WeaponQuality::Epic: return "Эпическое";
+	case WeaponQuality::Legendary: return "Легендарное";
+	default: return "Неизвестно";
+	}
 }
 
 int main()
@@ -325,7 +444,7 @@ int main()
 	*/
 
 
-	Paladin paladin;
+	//Paladin paladin;
 
 
 	// превратить злодеев в вектор (указателей, умных)
@@ -341,10 +460,47 @@ int main()
 	for (auto& evil : evils)
 		evil->GetInfo();
 	*/
+
+
+
+
+
+
 	return 0;
 }
 
 
 //ДЗ с 08.09: drawio (дорисовать диаграммку, добавить в репозиторий
+
+
+
+
+//===================================== ТЕМА 22.10.26: enum class =====================================
+/*
+1)enum class - специальный тип данных, который помогает определить именованный набор констант (ограниченный список понятный имен). Например, дни недели, варианты цветов, статусы заказа).
+2)отличие enum class от обычного enum:
+enum:
+- имена перечислений могут просочиться в глобальную область видимости или область блока, где объявлен enum (может возникнуть конфликт имен).
+- значения enum неявно преобразуются в целочисленные типы (обычно int). Удобно, но небезопасно, т.к можно случайно сравнить значения из несвязанных перечислений.
+enum class:
+- инкапсуляция перечислителей: перечислители живут внутри самого типа enum class и доступны только через идентификатор (color::red) - решает проблему конфликтов имен и делает код более читаемым.
+- отсутствия неявного преобразования в int. Значения enum class нельзя неявно присвоить целочисленной переменной. Для такого преобразования требуется явное приведение, например, с помощью static_cast<int>. Это повышает безопасность типов.
+- явное указание базового типа. Можно явно задать целочисленный тип для хранения значений (например, std::uint8_t, std::uint16_t), что полезно для экономии памяти или при работе с сериализацией.
+- отсутствие неявного вывода в потоки. Значения enum class нельзя напрямую вывести в поток std::cout — требуется явное приведение к типу, поддерживающему поток.
+3)«Магические числа» — это числа, вписанные в код напрямую, смысл которых непонятен без контекста (например, if (userState == 3)).
+Использование перечислений дает следующие плюсы:
+•	Читаемость и самодокументируемость: Код if (userState == State::Blocked) говорит сам за себя, в отличие от if (userState == 3).
+•	Удобство поддержки (Maintainability): Если потребуется изменить числовое значение константы, это делается в одном месте (в объявлении enum), и не нужно бегать по всему коду и менять цифры.
+•	Безопасность типов: Компилятор не позволит передать в функцию бессмысленное число, если она ожидает конкретный тип перечисления. Это отсекает целый класс ошибок.
+•	Рефакторинг: Современные IDE (среды разработки) могут автоматически находить все места использования конкретной именованной константы.
+4)как значения перечисления связаны с целыми числами и как получить/задать числовое значение:
+Под капотом каждое значение перечисления хранится как целое число.
+•	По умолчанию: Первому элементу присваивается 0, второму 1 и так далее. Вы также можете задать значения явно при объявлении: enum class Code { Ok = 200, NotFound = 404 };.
+•	Получить числовое значение: Из-за строгой типизации enum class не приводится к числу неявно. Чтобы получить число, нужно использовать явное приведение типов: int value = static_cast<int>(Code::NotFound); (получим 404).
+•	Задать числовое значение (создать из числа): Чтобы сделать значение перечисления из числа, также используется приведение: Code c = static_cast<Code>(200);. Важно: при этом компилятор не проверяет, существует ли такое значение в перечислении, поэтому ответственность за корректность лежит на программисте.
+
+*/
+
+
 
 
