@@ -1,5 +1,6 @@
 ﻿#include <iostream> 
 #include<vector>
+#include <memory>
 using namespace std;
 //ключевые понятия (принципы) ООП:
 //1) наследование
@@ -53,6 +54,16 @@ public:
 
 	virtual~NPC() = default;
 };
+
+enum class WeaponQuality {
+	Common = 1,    // Обычное
+	Uncommon,      // Необычное
+	Rare,          // Редкое
+	Epic,          // Эпическое
+	Legendary      // Легендарное
+};
+
+string GetQualityName(WeaponQuality quality);
 
 struct Weapon
 {
@@ -396,6 +407,7 @@ enum class WeaponQuality {
 string GetQualityName(WeaponQuality quality) {
 	switch (quality) {
 	case WeaponQuality::Common: return "Обычное";
+	case WeaponQuality::Uncommon: return "Необычное";
 	case WeaponQuality::Rare: return "Редкое";
 	case WeaponQuality::Epic: return "Эпическое";
 	case WeaponQuality::Legendary: return "Легендарное";
@@ -411,24 +423,62 @@ int main()
 	Player player;
 
 
-	cout << "Присядь путник у костра и расскажи, кто ты: " << endl;
-	cout << "\t1 - воин\n\t2 - волшебник\n\t3 - паладин" << endl;
-	short choice = 0;
+	
+	int choice = 0;
+	cout << "Присядь путник у костра и расскажи, кто ты:" << endl;
+	cout << "\t1 - воин\n\t2 - волшебник\n\t3 - паладин\n\t4 - лучник\n\t5 - разбойник" << endl;
 	cin >> choice;
-	switch (choice)
+
+	
+	if (choice < 1 || choice > 5) {
+		cout << "Таких героев еще не было в наших краях.\nПопытай удачу в поле!" << endl;
+		return 0;
+	}
+
+	
+	CharacterType type = static_cast<CharacterType>(choice);
+
+	
+	switch (type)
 	{
-	case 1:
+	case CharacterType::Warrior:
+		cout << "Воин — мастер ближнего боя, высокая броня и сила.\n";
 		player.Create(make_unique<Warrior>());
 		break;
-	case 2:
+	case CharacterType::Wizard:
+		cout << "Маг — повелитель стихий, большой урон, но мало здоровья.\n";
 		player.Create(make_unique<Wizard>());
 		break;
-	case 3:
+	case CharacterType::Paladin:
+		cout << "Паладин — сочетает силу воина и магию волшебника.\n";
 		player.Create(make_unique<Paladin>());
 		break;
-	default:
-		cout << "Таких ***** героев еще не было в наших краях.\nПопытай удачу в поле!" << endl;
+	case CharacterType::Archer:
+		cout << "Лучник — быстрый стрелок, бьёт издалека.\n";
+		player.Create(make_unique<Archer>());
+		break;
+	case CharacterType::Rogue:
+		cout << "Разбойник — скрытный убийца с высоким уроном.\n";
+		player.Create(make_unique<Rogue>());
+		break;
 	}
+
+	
+	int q = 0;
+	cout << "\nВыберите качество оружия:" << endl;
+	cout << "\t1 - Обычное\n\t2 - Необычное\n\t3 - Редкое\n\t4 - Эпическое\n\t5 - Легендарное" << endl;
+	cin >> q;
+
+	if (q < 1 || q > 5) {
+		cout << "Некорректное качество оружия." << endl;
+		return 0;
+	}
+
+	WeaponQuality quality = static_cast<WeaponQuality>(q);
+
+	
+	cout << "Индекс выбранного персонажа: " << static_cast<int>(type) << endl;
+	cout << "Индекс выбранного качества:   " << static_cast<int>(quality) << endl;
 
 	//TakeDamage
 
