@@ -1,6 +1,8 @@
 #pragma once
+#include <string>
+
 struct Spell
 {
-	string name{ "spell" };
+	std::string name{ "spell" };
 	unsigned int damage{ 1 };
 };

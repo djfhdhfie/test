@@ -45,6 +45,12 @@
     <ClCompile Include="Paladin.cpp">
       <Filter>Исходные файлы\classes</Filter>
     </ClCompile>
+    <ClCompile Include="Archer.cpp">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Rogue.cpp">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Evil.h">
@@ -60,6 +66,18 @@
       <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
     <ClInclude Include="Weapon.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Characters.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Archer.h">
+      <Filter>Исходные файлы\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Rogue.h">
       <Filter>Исходные файлы\classes</Filter>
     </ClInclude>
   </ItemGroup>

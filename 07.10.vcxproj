@@ -128,19 +128,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="07.10.cpp" />
+    <ClCompile Include="Archer.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NPC.h" />
     <ClCompile Include="Paladin.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="Warrior.cpp" />
     <ClCompile Include="Warrior.h" />
     <ClCompile Include="Wizard.cpp" />
     <ClCompile Include="Wizard.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Archer.h" />
+    <ClInclude Include="Characters.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="Evil.h" />
     <ClInclude Include="Paladin.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Rogue.h" />
     <ClInclude Include="Spell.h" />
     <ClInclude Include="Weapon.h" />
   </ItemGroup>

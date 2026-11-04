@@ -2,6 +2,7 @@
 #include<vector>
 #include "NPC.h"
 #include "Warrior.h"
+#include "Characters.h"
 
 //конструктор по умолчанию
 Warrior::Warrior()

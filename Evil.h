@@ -1,4 +1,9 @@
 #pragma once
+#include <iostream>
+#include <string>
+#include "NPC.h"
+#include "Characters.h"
+
 class Evil : public NPC
 {
 public:
@@ -9,26 +14,30 @@ public:
 		damage = 5;
 		armor = 3;
 	}
-	Evil(string name) : Evil() //делегирование конструктора (то есть вызовется вначале базовый)
+
+	//делегирование конструкторов
+	Evil(std::string name) : Evil()
 	{
 		this->name = name;
 	}
-	Evil(string name, unsigned int damage) : Evil(name)
+
+	Evil(std::string name, unsigned int damage) : Evil(name)
 	{
 		this->damage = damage;
 	}
-	Evil(string name, unsigned int damage, unsigned int health) : Evil(name, damage)
+
+	Evil(std::string name, unsigned int damage, unsigned int health) : Evil(name, damage)
 	{
 		this->health = health;
 	}
-	Evil(string name, unsigned int damage, unsigned int health, unsigned int armor) : Evil(name, damage, health)
+
+	Evil(std::string name, unsigned int damage, unsigned int health, unsigned int armor) : Evil(name, damage, health)
 	{
 		this->armor = armor;
 	}
 
 	~Evil()
 	{
-		cout << name << " упал в обморок" << endl;
+		std::cout << name << " упал в обморок" << std::endl;
 	}
-	//придумать интересный деструктор для злодеев
 };

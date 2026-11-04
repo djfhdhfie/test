@@ -1,5 +1,5 @@
 #include "Wizard.h"
-
+#include "Characters.h"
 #include <cstddef>
 #include <iostream>
 

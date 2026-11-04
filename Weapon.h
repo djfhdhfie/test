@@ -1,6 +1,10 @@
 #pragma once
+#include <string>
+#include "Enums.h"
+
 struct Weapon
 {
-	string name{ "weapon" };
+	std::string name{ "weapon" };
 	unsigned int damage{ 1 };
+	WeaponQuality quality{ WeaponQuality::Common }; // Поле качества
 };

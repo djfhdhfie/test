@@ -1,5 +1,5 @@
 #include "Paladin.h"
-
+#include "Characters.h"
 #include <iostream>
 
 Paladin::Paladin()
