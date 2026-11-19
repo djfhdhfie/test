@@ -36,7 +36,7 @@ void Warrior::Create()
 };
 void Warrior::GetInfo()
 {
-	NPC::GetInfo();
+	this->NPC::GetInfo();;
 	cout << "сила: " << strength << endl;
 };
 void Warrior::GetWeapon()

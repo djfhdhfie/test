@@ -1,6 +1,6 @@
+#include "NPC.h"
 #include <iostream> 
 #include<vector>
-#include "NPC.h"
 #include "Weapon.h"
 
 using namespace std;

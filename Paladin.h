@@ -4,7 +4,7 @@
 #include "Wizard.h"
 
 // множественное наследование
-class Paladin : public Warrior, public Wizard
+class Paladin : public Warrior, public Wizard, public NPC
 {
 public:
     Paladin();
